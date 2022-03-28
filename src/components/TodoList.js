@@ -9,7 +9,10 @@ const TodoList = () => {
       <ul className="todo-list">
         {items.map((item) => {
           return (
-            <li key={item.id}>
+            <li
+              key={item.id}
+              className={item.completed === true ? "completed" : null}
+            >
               <div className="view">
                 <input id={item.id} className="toggle" type="checkbox" />
                 <label htmlFor={item.id}>{item.title}</label>
