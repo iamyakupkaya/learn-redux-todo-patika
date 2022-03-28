@@ -226,17 +226,22 @@ body {
 	top: 0;
 	right: 10px;
 	bottom: 0;
-	width: 40px;
-	height: 40px;
+	width: 50px;
+	height: 50px;
 	margin: auto 0;
 	font-size: 30px;
-	color: #cc9a9a;
+	color: #993030;
 	margin-bottom: 11px;
 	transition: color 0.2s ease-out;
+	transition: font-size 0.2s ease-out;
+
+
 }
 
 .todo-list li .destroy:hover {
-	color: #af5b5e;
+	color: #9b0005;
+	font-size: 40px;
+
 }
 
 .todo-list li .destroy:after {
