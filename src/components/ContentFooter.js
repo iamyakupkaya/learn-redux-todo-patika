@@ -1,20 +1,23 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { changeActive, clearAll } from "../redux/todos/todosSlice";
+import {
+  selectorTodoItems,
+  selectorTodoActiveFilter,
+} from "../redux/todos/Selectors";
 
 const ContentFooter = () => {
-  const items = useSelector((state) => state.todos.items);
+  const items = useSelector(selectorTodoItems);
   //Array.filter return an array to provide condition
   let itemsCount = items.filter((item) => !item.completed).length; //if !item.complited is true it will add to array filter.
 
-  const activeFilter = useSelector((state) => state.todos.activeFilter);
+  const activeFilter = useSelector(selectorTodoActiveFilter);
 
   const dispatch = useDispatch();
 
   const clearAllCompleted = () => {
-    dispatch (clearAll());
-
-  }
+    dispatch(clearAll());
+  };
 
   return (
     <React.Fragment>
@@ -54,7 +57,9 @@ const ContentFooter = () => {
           </li>
         </ul>
 
-        <button onClick={() => clearAllCompleted()}className="clear-completed">Clear completed</button>
+        <button onClick={() => clearAllCompleted()} className="clear-completed">
+          Clear completed
+        </button>
       </footer>
     </React.Fragment>
   );
