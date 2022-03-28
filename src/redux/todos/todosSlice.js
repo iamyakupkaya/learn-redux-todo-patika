@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { v4 as uuidv4 } from "uuid"; //uuidv4(); // ⇨ '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d'
 
 const initialState = {
   items: [
@@ -12,9 +13,24 @@ const TodoSlice = createSlice({
   initialState, //this is initial state
   reducers: {
     // this is our action methods -dipatch methods area-
-    addTodo: (state, action) => {
-      state.items.push(action.payload);
-      return state;
+    addTodo: {
+      reducer: (state, action) => {
+        state.items.push(action.payload);
+      },
+      // when we dispatch a method first of all our dispatch argumans come to prepare after that it will go to action payload
+      prepare: (payload) => {
+        //prepare:({title})
+        console.log("gelen payload: " + payload);
+        const { title } = payload;
+        return {
+          //following payload is goign to add  to action payload.
+          payload: {
+            id: uuidv4(),
+            title: title,
+            completed: false,
+          },
+        };
+      },
     },
     changeComplete: (state, action) => {
       const item = state.items.find((item) => item.id === action.payload);

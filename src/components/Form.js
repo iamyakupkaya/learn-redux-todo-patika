@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { v4 as uuidv4 } from "uuid"; //uuidv4(); // ⇨ '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d'
 import { useDispatch } from "react-redux";
 import { addTodo } from "../redux/todos/todosSlice";
 
@@ -10,8 +9,10 @@ const Form = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(addTodo({ id: uuidv4(), title: title, completed: false }));
-    setTitle("");
+    if (title) {
+      dispatch(addTodo({ title: title}));
+      setTitle("");
+    }
   };
   return (
     <form onSubmit={handleSubmit}>
