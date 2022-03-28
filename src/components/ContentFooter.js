@@ -1,27 +1,60 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { changeActive, clearAll } from "../redux/todos/todosSlice";
 
 const ContentFooter = () => {
+  const items = useSelector((state) => state.todos.items);
+  //Array.filter return an array to provide condition
+  let itemsCount = items.filter((item) => !item.completed).length; //if !item.complited is true it will add to array filter.
+
+  const activeFilter = useSelector((state) => state.todos.activeFilter);
+
+  const dispatch = useDispatch();
+
+  const clearAllCompleted = () => {
+    dispatch (clearAll());
+
+  }
+
   return (
     <React.Fragment>
       <footer className="footer">
         <span className="todo-count">
-          <strong>2</strong>
-          items left
+          <strong>{itemsCount} </strong>
+          Item{itemsCount > 1 && "s"} Left
         </span>
 
         <ul className="filters">
           <li>
-            <a href="/#" className="selected">All</a>
+            <a
+              href="/#"
+              onClick={() => dispatch(changeActive("all"))}
+              className={activeFilter === "all" ? "selected" : null}
+            >
+              All
+            </a>
           </li>
           <li>
-            <a href="/#">Active</a>
+            <a
+              href="/#"
+              onClick={() => dispatch(changeActive("active"))}
+              className={activeFilter === "active" ? "selected" : null}
+            >
+              Active
+            </a>
           </li>
           <li>
-            <a href="/#">Completed</a>
+            <a
+              href="/#"
+              onClick={() => dispatch(changeActive("completed"))}
+              className={activeFilter === "completed" ? "selected" : null}
+            >
+              Completed
+            </a>
           </li>
         </ul>
 
-        <button className="clear-completed">Clear completed</button>
+        <button onClick={() => clearAllCompleted()}className="clear-completed">Clear completed</button>
       </footer>
     </React.Fragment>
   );

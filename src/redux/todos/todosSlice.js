@@ -5,6 +5,7 @@ const initialState = {
     { id: 1, title: "yakup", completed: true },
     { id: 2, title: "KAYA", completed: false },
   ],
+  activeFilter:"all",
 };
 const TodoSlice = createSlice({
   name: "todos", // this name using in action type
@@ -23,8 +24,17 @@ const TodoSlice = createSlice({
       const newItems = state.items.filter((item) => item.id !== action.payload);
       state.items = newItems;
     },
+
+    changeActive: (state, action) => {
+      state.activeFilter = action.payload;
+    },
+    clearAll: (state, action) => {
+      state.items = state.items.filter ((item) => !item.completed)
+    }
+
+
   },
 });
 
 export const TodoReducer = TodoSlice.reducer;
-export const { addTodo, changeComplete, removeTodo} = TodoSlice.actions;
+export const { addTodo, changeComplete, removeTodo, changeActive, clearAll} = TodoSlice.actions;
