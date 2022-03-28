@@ -4,6 +4,7 @@ const Footer = () => {
   return (
     <footer className="info">
       <p>Click to edit a todo</p>
+      <p><i>Yakup KAYA</i></p>
       <p>
         Created by <a href="https://d12n.me/">Dmitry Sharabin</a>
       </p>
@@ -14,4 +15,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default React.memo(Footer);
